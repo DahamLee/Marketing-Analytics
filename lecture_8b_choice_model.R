@@ -128,7 +128,7 @@ head(Train.data)
 Train.ml = mlogit(choice ~ price + time + change + comfort, Train.data)
 summary(Train.ml)
 
-# "rpar" objects contain all the relevant information about the distribution of random parameters. 
+# "rpar" objects contain all the relevant information about the distribution of random parameters.(random effect 보겠다는 것)
 # These functions enables to obtain easily descriptive 
 # statistics, density, probability and quantiles of the distribution.
 Train.mxl = mlogit(choice ~ price + time + change + comfort, Train.data, panel = TRUE, rpar = c(time = "n", change = "n", comfort = "n"), correlation = FALSE, R = 100, halton = NA)

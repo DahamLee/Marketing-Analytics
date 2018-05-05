@@ -10,13 +10,21 @@ mall_choice
 
 M.data = mlogit.data(mall_choice, shape="long", choice="choice", alt.levels=c("1","2","3","4","0") )
 head(M.data, 20)
-M.data
+head(M.data)
 
 mall.m1 = mlogit(choice ~ discount + targeting + distance | income + gender , M.data, reflevel="0")
 mall.m1
+mean(M.data$week)
+mean(M.data$discount)
+mean(M.data$targeting)
+mean(M.data$distance)
+mean(M.data$gender)
+mean(M.data$income)
+
 
 summary(mall.m1)
 mall.fit = fitted(mall.m1, outcome=FALSE)
+mall.fit
 colMeans(mall.fit)
 
 soda  = read.csv("/Users/daham/Desktop/Marketing Analysis/Assignment5/Soda_choice_data.csv", header=T)

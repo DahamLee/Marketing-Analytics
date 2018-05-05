@@ -7,6 +7,7 @@ library(mnormt)
 #stage 1. read data into R and create columns for censored data
 DataFile = "/Users/daham/Desktop/Marketing Analysis/assignment4/CreditCard_SOW_data2.csv"
 sow.data = read.csv(DataFile, header=T)
+head(sow.data)
 sow.data$Cens0 = (sow.data$SOW==0)*1
 sow.data$Cens1 = (sow.data$SOW==1)*1
 
@@ -16,6 +17,7 @@ sow.XRC = cbind(1, as.matrix(sow.data[sow.data$Cens0==1, 3:4]))
 sow.XLC = cbind(1, as.matrix(sow.data[sow.data$Cens1==1, 3:4])) 
 sow.X = cbind(1, as.matrix(sow.data[, 3:4]))
 # sow.X %*% curBeta
+sow.X
 sow.X2 = t(sow.X)%*%sow.X
 #sow.X2
 #t(sow.X) transpose
@@ -23,7 +25,7 @@ sow.X2 = t(sow.X)%*%sow.X
 
 # XRC 의 개수
 nRC = dim(sow.XRC)[1]
-#nRC
+nRC
 # XLC 의 개수
 nLC = dim(sow.XLC)[1]
 #nLC
@@ -89,6 +91,7 @@ for (m in 1:NIT){
 	sow.Y[sow.data$Cens1==1] = curYLC
 	#step 2.b sample beta
 	# solve 함수 설명: This generic function solves the equation a %*% x = b for x, where b can be either a vector or a matrix.
+	# if 'b' is missing than 'b' would be identity matrix. 즉 역함수 구할수 있는 function  
 	sigma.hat = solve(curTau*sow.X2 + iSigma.beta)
 	#sigma.hat
 	betaPos.mn = sigma.hat%*%(curTau*t(sow.X)%*%sow.Y + iSigma.beta%*%mu.beta)

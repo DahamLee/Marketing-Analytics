@@ -1,9 +1,10 @@
 rm(list=ls())
 bac= read.csv("/Users/daham/Desktop/Marketing Analysis/Bank_customer_acquisition.csv", header=T)
 head(bac)
+bac$Acquisition
 # logit regression
 bac.glm1 = glm(Acquisition~Age+Income+HomeVal+LoanInd+Dist2Bank+MktShare, data=bac, family=binomial(link="logit"))
-
+summary(bac.glm1)
 # probit regression
 bac.glm2 = glm(Acquisition~Age+Income+HomeVal+LoanInd+Dist2Bank+MktShare, data=bac, family=binomial(link="probit"))
 
